@@ -5,8 +5,10 @@ const {
 } = require('./config/index');
 const {
     logErrors,
-    errorHandler
+    wrapErrors,
+    errorHandler,
 } = require('./utils/middleware/errorHandlers.js');
+const notFoundHandler = require('./utils/middleware/notFoundHandler');
 
 app.use(express.json());
 
@@ -16,7 +18,12 @@ app.get('/', (req, res) => {
     })
 });
 
+// Catch not found error - 404
+app.use(notFoundHandler);
+
+// Errors middleware
 app.use(logErrors);
+app.use(wrapErrors);
 app.use(errorHandler);
 
 app.listen(config.port, function () {
