@@ -3,6 +3,9 @@ const app = express();
 const {
     config
 } = require('./config/index');
+
+const productsApi = require('./routes/products.js');
+
 const {
     logErrors,
     wrapErrors,
@@ -12,11 +15,8 @@ const notFoundHandler = require('./utils/middleware/notFoundHandler');
 
 app.use(express.json());
 
-app.get('/', (req, res) => {
-    res.json({
-        "message": "Welcome to FG POS"
-    })
-});
+// Routes
+productsApi(app);
 
 // Catch not found error - 404
 app.use(notFoundHandler);
