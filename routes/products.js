@@ -1,10 +1,8 @@
-const fs = require('fs');
 const express = require('express');
 const ProductsService = require('../services/products');
-const cacheReponse = require('../utils/cacheResponse');
 const {
-    FIVE_MINUTES_IN_SECONDS
-} = require('../utils/time');
+    handleGetRequest
+} = require('../utils/handleSuccessfulRequest');
 
 function productsApi(app) {
     const router = express.Router();
@@ -15,10 +13,7 @@ function productsApi(app) {
     router.get('/available', async (req, res, next) => {
         try {
             const products = await productsService.getAvailableProducts();
-            res.status(200).json({
-                data: products,
-                message: 'Productos disponibles listados'
-            })
+            handleGetRequest(res, products, 'Productos disponibles', 'os');
         } catch (error) {
             next(error);
         }

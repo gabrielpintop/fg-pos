@@ -8,5 +8,9 @@ const productDescriptionSchema = joi.string().max(200);
 const productImageSchema = joi.string().uri();
 const productNameSchema = joi.string();
 const productSoldUnitsSchema = joi.number().min(0);
-const productUnitaryPriceSchema = joi.number.min(0);
+const productUnitaryPriceSchema = joi.number().min(0);
 const productUnitsSchema = joi.number().min(0);
+
+module.exports = {
+    productIdSchema
+}

@@ -5,6 +5,7 @@ const {
 } = require('./config/index');
 
 const productsApi = require('./routes/products.js');
+const invoicesApi = require('./routes/invoices.js');
 
 const {
     logErrors,
@@ -17,6 +18,7 @@ app.use(express.json());
 
 // Routes
 productsApi(app);
+invoicesApi(app);
 
 // Catch not found error - 404
 app.use(notFoundHandler);
