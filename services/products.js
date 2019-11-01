@@ -11,6 +11,16 @@ class ProductsService {
         const products = await this.mongoDB.getAll(this.collection, query, projection);
         return products || [];
     }
+
+    async getAvailableProducts() {
+        const products = await this.mongoDB.getAll(this.collection, {
+            active: true,
+            units: {
+                $gt: 0
+            }
+        });
+        return products || [];
+    }
 }
 
 module.exports = ProductsService;

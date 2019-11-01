@@ -12,18 +12,12 @@ function productsApi(app) {
 
     const productsService = new ProductsService();
 
-    router.get('/forSell', async (req, res, next) => {
+    router.get('/available', async (req, res, next) => {
         try {
-            const products = await productsService.getProducts({
-                active: true,
-                units: {
-                    $gt: 0
-                }
-            });
-
+            const products = await productsService.getAvailableProducts();
             res.status(200).json({
                 data: products,
-                message: 'Products listed'
+                message: 'Productos disponibles listados'
             })
         } catch (error) {
             next(error);

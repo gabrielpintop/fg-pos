@@ -1,0 +1,25 @@
+[{
+        "active": true,
+        "boughtUnits": 90,
+        "clientPrice": 3000,
+        "description": "Tortilla de harina de trigo enrollada rellena de diversos y ricos ingredientes",
+        "id": "60be5e14-3396-4ab8-ae5b-2906fde9f2cb",
+        "image": "https://images.pexels.com/photos/327168/pexels-photo-327168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        "name": "Burrito",
+        "soldUnits": 70,
+        "unitaryPrice": 2000,
+        "units": 20
+    },
+    {
+        "active": true,
+        "boughtUnits": 20,
+        "clientPrice": 35000,
+        "description": "Delicioso y fresco salmón acompañado de finas hierbas",
+        "id": "60be5e14-3396-4ab8-ae5b-2906fde9g2eb",
+        "image": "https://images.pexels.com/photos/46239/salmon-dish-food-meal-46239.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        "name": "Salmón",
+        "soldUnits": 20,
+        "unitaryPrice": 25000,
+        "units": 0
+    }
+]
