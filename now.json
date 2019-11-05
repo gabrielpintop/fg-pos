@@ -1,0 +1,18 @@
+{
+    "name": "fg-pos",
+    "version": 2,
+    "builds": [{
+        "src": "index.js",
+        "use": "@now/node"
+    }],
+    "routes": [{
+        "src": "/(.*)",
+        "dest": "/index.js"
+    }],
+    "env": {
+        "DB_USER": "@fg-pos-db-user",
+        "DB_PASSWORD": "@fg-pos-db-password",
+        "DB_HOST": "@fg-pos-db-host",
+        "DB_NAME": "@fg-pos-db-name"
+    }
+}

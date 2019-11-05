@@ -9,10 +9,14 @@ const {
 const notFoundHandler = require('./utils/middleware/notFoundHandler');
 
 const inventarioApi = require('./routes/inventory');
+const productsApi = require('./routes/products');
+const invoicesApi = require('./routes/invoices');
 
 app.use(express.json());
 
 inventarioApi(app);
+productsApi(app);
+invoicesApi(app);
 
 // Catch not found error - 404
 app.use(notFoundHandler);
