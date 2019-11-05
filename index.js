@@ -1,22 +1,18 @@
 const express = require('express');
 const app = express();
+const { config } = require('./config/index');
 const {
-    config
-} = require('./config/index');
-const {
-    logErrors,
-    wrapErrors,
-    errorHandler,
+  logErrors,
+  wrapErrors,
+  errorHandler
 } = require('./utils/middleware/errorHandlers.js');
 const notFoundHandler = require('./utils/middleware/notFoundHandler');
 
+const inventarioApi = require('./routes/inventory');
+
 app.use(express.json());
 
-app.get('/', (req, res) => {
-    res.json({
-        "message": "Welcome to FG POS"
-    })
-});
+inventarioApi(app);
 
 // Catch not found error - 404
 app.use(notFoundHandler);
@@ -26,6 +22,6 @@ app.use(logErrors);
 app.use(wrapErrors);
 app.use(errorHandler);
 
-app.listen(config.port, function () {
-    console.log(`Listening http://localhost:${config.port}`);
+app.listen(config.port, function() {
+  console.log(`Listening http://localhost:${config.port}`);
 });
