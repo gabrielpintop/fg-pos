@@ -1,5 +1,6 @@
 const express = require('express');
 const InvoicesService = require('../services/invoices');
+const ProductsService = require('../services/products');
 const {
     createInvoiceSchema
 } = require('../schemas/invoices');

@@ -21,6 +21,13 @@ class ProductsService {
         });
         return products || [];
     }
+
+    async decreaseProductsUnits(products) {
+        const bulkUpdateOperations = []
+        products.map(product => {
+            bulkUpdateOperations.push()
+        });
+    }
 }
 
 module.exports = ProductsService;
