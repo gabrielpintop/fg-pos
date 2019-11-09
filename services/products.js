@@ -42,8 +42,10 @@ class ProductsService {
         return product || {};
     }
 
-    async getProducts(query, projection) {
-        const products = await this.mongoDB.getAll(this.collection, query, projection);
+    async getProducts(email) {
+        const products = await this.mongoDB.getAll(this.collection, {
+            "productOwner": email
+        });
         return products || [];
     }
 

@@ -10,7 +10,8 @@ function productsApi(app) {
   app.use('/api/products', router);
 
   router.get('/', async function (req, res, next) {
-    const products = await productsService.getProducts();
+    const email = "rodriguez02fer09@gmail.com";
+    const products = await productsService.getProducts(email);
     try {
       res.status(200).json({
         data: products,
