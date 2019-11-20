@@ -6,9 +6,10 @@ const invoiceValueSchema = joi.number().min(0);
 const invoiceSoldProductsSchema = joi.array().items(invoiceProductSchema);
 
 const createInvoiceSchema = {
+    creationDate: joi.date().required(),
     totalPrice: invoiceValueSchema.required(),
     soldProducts: invoiceSoldProductsSchema.required().min(1)
-}
+};
 
 module.exports = {
     createInvoiceSchema,
