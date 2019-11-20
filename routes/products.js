@@ -17,12 +17,12 @@ function productsApi(app) {
         data: products,
         message: 'Products listed'
       });
-    } catch {
+    } catch (error) {
       next(error);
     }
   });
 
-  router.get('/available', async (req, res, next) => {
+  router.get('/available', async function (req, res, next) {
     try {
       const products = await productsService.getAvailableProducts();
       handleGetRequest(res, products, 'Productos disponibles', 'os');
@@ -40,7 +40,7 @@ function productsApi(app) {
         data: products,
         message: 'Product re'
       });
-    } catch {
+    } catch (error) {
       next(error);
     }
   });
@@ -53,7 +53,7 @@ function productsApi(app) {
         data: productsId,
         message: 'products created'
       });
-    } catch {
+    } catch (error) {
       next(error);
     }
   });
@@ -70,7 +70,7 @@ function productsApi(app) {
         data: updateProductsId,
         message: 'products update'
       });
-    } catch {
+    } catch (error) {
       next(error);
     }
   });
@@ -84,7 +84,7 @@ function productsApi(app) {
         data: deleteProductsId,
         message: 'product remove'
       });
-    } catch {
+    } catch (error) {
       next(error);
     }
   });

@@ -9,7 +9,6 @@ const {
   errorHandler
 } = require('./utils/middleware/errorHandlers.js');
 const notFoundHandler = require('./utils/middleware/notFoundHandler');
-
 const productsApi = require('./routes/products');
 const invoicesApi = require('./routes/invoices');
 

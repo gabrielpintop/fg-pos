@@ -16,7 +16,7 @@ function invoicesApi(app) {
 
     const invoicesService = new InvoicesService();
 
-    router.get('/', async (req, res, next) => {
+    router.get('/', async function (req, res, next) {
         try {
             const invoices = await invoicesService.getInvoices();
             handleGetRequest(res, invoices, 'Facturas', 'as');
@@ -25,7 +25,7 @@ function invoicesApi(app) {
         }
     });
 
-    router.post('/', validationHandler(createInvoiceSchema), async (req, res, next) => {
+    router.post('/', validationHandler(createInvoiceSchema), async function (req, res, next) {
         const {
             body: invoice
         } = req;
