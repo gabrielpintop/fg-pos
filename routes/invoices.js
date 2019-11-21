@@ -1,4 +1,5 @@
 const express = require('express');
+const passport = require('passport');
 const InvoicesService = require('../services/invoices');
 const ProductsService = require('../services/products');
 const {
@@ -10,6 +11,8 @@ const {
     handleGetRequest
 } = require('../utils/handleSuccessfulRequest');
 
+require('../utils/strategies/jwt');
+
 function invoicesApi(app) {
     const router = express.Router();
     app.use('/api/invoices', router);
@@ -17,22 +20,27 @@ function invoicesApi(app) {
     const invoicesService = new InvoicesService();
     const productsService = new ProductsService();
 
-    router.get('/', async function (req, res, next) {
+    router.get('/', passport.authenticate('jwt', {
+        session: false
+    }), async function (req, res, next) {
         try {
-            const invoices = await invoicesService.getInvoices();
+            const invoices = await invoicesService.getInvoices(req.user.id);
             handleGetRequest(res, invoices, 'Facturas', 'as');
         } catch (error) {
             next(error);
         }
     });
 
-    router.post('/', validationHandler(createInvoiceSchema), async function (req, res, next) {
+    router.post('/', passport.authenticate('jwt', {
+        session: false
+    }), validationHandler(createInvoiceSchema), async function (req, res, next) {
         const {
             body: invoice
         } = req;
         try {
             const createdInvoiceId = await invoicesService.createInvoice({
-                invoice
+                invoice,
+                user: req.user._id
             });
             const updatedProductsUnits = await productsService.decreaseProductsUnits(invoice.soldProducts);
 

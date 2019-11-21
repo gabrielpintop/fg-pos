@@ -1,37 +1,37 @@
 const express = require('express');
+const passport = require('passport');
 const ProductsService = require('../services/products');
 const {
   handleGetRequest
 } = require('../utils/handleSuccessfulRequest');
+
+require('../utils/strategies/jwt');
 
 function productsApi(app) {
   const router = express.Router();
   const productsService = new ProductsService();
   app.use('/api/products', router);
 
-  router.get('/', async function (req, res, next) {
-    const email = "gl.pinto10@uniandes.edu.co";
-    const products = await productsService.getProducts(email);
+  router.get('/', passport.authenticate('jwt', {
+    session: false
+  }), async function (req, res, next) {
+    const products = await productsService.getProducts(req.user._id);
+    console.log(products);
+
     try {
+      products.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
       res.status(200).json({
         data: products,
-        message: 'Products listed'
+        message: 'Productos listados'
       });
     } catch (error) {
       next(error);
     }
   });
 
-  router.get('/available', async function (req, res, next) {
-    try {
-      const products = await productsService.getAvailableProducts();
-      handleGetRequest(res, products, 'Productos disponibles', 'os');
-    } catch (error) {
-      next(error);
-    }
-  });
-
-  router.get('/:productId', async function (req, res, next) {
+  router.get('/:productId', passport.authenticate('jwt', {
+    session: false
+  }), async function (req, res, next) {
     const productId = req.params.productId;
     try {
       const products = await productsService.getProduct(productId);
@@ -45,7 +45,9 @@ function productsApi(app) {
     }
   });
 
-  router.post('/', async function (req, res, next) {
+  router.post('/', passport.authenticate('jwt', {
+    session: false
+  }), async function (req, res, next) {
     const product = req.body;
     try {
       const productsId = await productsService.createProduct(product);
@@ -58,7 +60,9 @@ function productsApi(app) {
     }
   });
 
-  router.put('/:productId', async function (req, res, next) {
+  router.put('/:productId', passport.authenticate('jwt', {
+    session: false
+  }), async function (req, res, next) {
     const productId = req.params.productId;
     const product = req.body;
     try {
@@ -75,7 +79,9 @@ function productsApi(app) {
     }
   });
 
-  router.delete('/:productId', async function (req, res, next) {
+  router.delete('/:productId', passport.authenticate('jwt', {
+    session: false
+  }), async function (req, res, next) {
     const productId = req.params.productId;
     try {
       const deleteProductsId = await productsService.deletedProduct(productId);

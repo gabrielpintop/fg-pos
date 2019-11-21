@@ -7,15 +7,19 @@ class InvoicesService {
         this.mongoDB = new MongoLib();
     }
 
-    async getInvoices(query, projection) {
-        const invoices = await this.mongoDB.getAll(this.collection, query, projection);
+    async getInvoices(user) {
+        const invoices = await this.mongoDB.getAll(this.collection, {
+            user
+        }, projection);
         return invoices || [];
     }
 
     async createInvoice({
-        invoice
+        invoice,
+        user
     }) {
         invoice['creationTime'] = new Date().getTime();
+        invoice['user'] = user;
         const createdInvoiceId = await this.mongoDB.create(this.collection, invoice);
         return createdInvoiceId;
     }
