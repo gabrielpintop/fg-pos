@@ -85,7 +85,6 @@ function productsApi(app) {
     const productId = req.params.productId;
     try {
       const deleteProductsId = await productsService.deleteProduct(productId);
-      console.log(productsMock);
       res.status(200).json({
         data: deleteProductsId,
         message: 'product remove'
