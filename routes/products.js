@@ -50,7 +50,7 @@ function productsApi(app) {
   }), async function (req, res, next) {
     const product = req.body;
     try {
-      const productsId = await productsService.createProduct(product);
+      const productsId = await productsService.createProduct(product, req.user._id);
       res.status(201).json({
         data: productsId,
         message: 'products created'
@@ -84,7 +84,7 @@ function productsApi(app) {
   }), async function (req, res, next) {
     const productId = req.params.productId;
     try {
-      const deleteProductsId = await productsService.deletedProduct(productId);
+      const deleteProductsId = await productsService.deleteProduct(productId);
       console.log(productsMock);
       res.status(200).json({
         data: deleteProductsId,

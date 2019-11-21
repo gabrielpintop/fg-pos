@@ -17,7 +17,10 @@ class ProductsService {
         return products || [];
     }
 
-    async createProduct(product) {
+    async createProduct(product, user) {
+        product['user'] = user;
+        console.log(product);
+
         const createProductId = await this.mongoDB.update(this.collection, product);
         return createProductId;
     }
