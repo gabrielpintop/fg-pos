@@ -52,9 +52,9 @@ class ProductsService {
         return product || {};
     }
 
-    async getProducts(email) {
+    async getProducts(user) {
         const products = await this.mongoDB.getAll(this.collection, {
-            "productOwner": email
+            user
         });
         return products || [];
     }

@@ -9,11 +9,14 @@ const {
   errorHandler
 } = require('./utils/middleware/errorHandlers.js');
 const notFoundHandler = require('./utils/middleware/notFoundHandler');
+
+const authApi = require('./routes/auth.js');
 const productsApi = require('./routes/products');
 const invoicesApi = require('./routes/invoices');
 
 app.use(express.json());
 
+authApi(app);
 productsApi(app);
 invoicesApi(app);
 
