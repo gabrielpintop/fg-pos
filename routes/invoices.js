@@ -15,6 +15,7 @@ function invoicesApi(app) {
     app.use('/api/invoices', router);
 
     const invoicesService = new InvoicesService();
+    const productsService = new ProductsService();
 
     router.get('/', async function (req, res, next) {
         try {
@@ -33,7 +34,12 @@ function invoicesApi(app) {
             const createdInvoiceId = await invoicesService.createInvoice({
                 invoice
             });
-            handleCreateRequest(res, createdInvoiceId, 'Factura', 'a');
+            const updatedProductsUnits = await productsService.decreaseProductsUnits(invoice.soldProducts);
+
+            handleCreateRequest(res, {
+                createdInvoiceId,
+                updatedProductsUnits
+            }, 'Factura', 'a');
         } catch (error) {
             next(error);
         }
