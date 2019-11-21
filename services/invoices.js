@@ -19,6 +19,14 @@ class InvoicesService {
         const createdInvoiceId = await this.mongoDB.create(this.collection, invoice);
         return createdInvoiceId;
     }
+
+    async deleteInvoice(invoiceId) {
+        const deletedInvoiceId = await this.mongoDB.delete(
+            this.collection,
+            invoiceId
+        );
+        return deletedInvoiceId;
+    }
 }
 
 module.exports = InvoicesService;

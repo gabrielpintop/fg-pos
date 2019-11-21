@@ -22,12 +22,22 @@ class ProductsService {
         return createProductId;
     }
 
-    // async decreaseProductsUnits(products) {
-    //     const bulkUpdateOperations = []
-    //     products.map(product => {
-    //         bulkUpdateOperations.push()
-    //     });
-    // }
+    async decreaseProductsUnits(products) {
+        const bulkOperations = [];
+        products.forEach(product => {
+            bulkOperations.push({
+                id: product.id,
+                update: {
+                    $inc: {
+                        soldUnits: product.soldUnits,
+                        units: -product.soldUnits
+                    }
+                }
+            });
+        });
+        const result = await this.mongoDB.updateBulkWrite(this.collection, bulkOperations);
+        return result.modifiedCount;
+    }
 
     async deleteProduct(productId) {
         const deletedProductId = await this.mongoDB.delete(
