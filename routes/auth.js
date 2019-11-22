@@ -89,16 +89,7 @@ function authApi(app) {
         message: 'user created'
       });
     } catch (error) {
-      if (error.code && error.code === 11000) {
-        console.log(error);
-
-        res.status(401).json({
-          error: error,
-          message: 'Ya existe un usuario con el correo indicado'
-        })
-      } else {
-        next(error);
-      }
+      next(error);
     }
   });
 

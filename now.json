@@ -13,6 +13,7 @@
         "DB_USER": "@fg-pos-db-user",
         "DB_PASSWORD": "@fg-pos-db-password",
         "DB_HOST": "@fg-pos-db-host",
-        "DB_NAME": "@fg-pos-db-name"
+        "DB_NAME": "@fg-pos-db-name",
+        "AUTH_JWT_SECRET": "@fg-pos-secret"
     }
 }
