@@ -10,7 +10,7 @@ class InvoicesService {
     async getInvoices(user) {
         const invoices = await this.mongoDB.getAll(this.collection, {
             user
-        }, projection);
+        }, {});
         return invoices || [];
     }
 

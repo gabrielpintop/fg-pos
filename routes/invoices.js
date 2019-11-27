@@ -24,7 +24,8 @@ function invoicesApi(app) {
         session: false
     }), async function (req, res, next) {
         try {
-            const invoices = await invoicesService.getInvoices(req.user.id);
+            const invoices = await invoicesService.getInvoices(req.user._id);
+            invoices.sort((x, y) => y.creationDate - x.creationDate);
             handleGetRequest(res, invoices, 'Facturas', 'as');
         } catch (error) {
             next(error);
