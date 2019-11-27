@@ -123,7 +123,7 @@ function authApi(app) {
         };
 
         const token = jwt.sign(payload, config.authJwtSecret, {
-          expiresIn: '1h'
+          expiresIn: '2h'
         });
 
         return res.status(200).json({
